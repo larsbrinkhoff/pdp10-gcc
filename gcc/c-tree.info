@@ -1,0 +1,39 @@
+This is c-tree.info, produced by makeinfo version 4.0 from c-tree.texi.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* c-tree: (c-tree).            C/C++ Internal Representation
+END-INFO-DIR-ENTRY
+   This manual documents the internal representation used by GCC to
+represent C and C++ source programs.
+
+   Copyright (c) 1999, 2000, 2001 Free Software Foundation, Inc.
+
+
+Indirect:
+c-tree.info-1: 375
+c-tree.info-2: 46704
+c-tree.info-3: 88590
+
+Tag Table:
+(Indirect)
+Node: Top375
+Node: Deficiencies3162
+Node: Overview3400
+Node: Trees7532
+Node: Identifiers7649
+Node: Containers9148
+Node: Types10290
+Node: Scopes22059
+Node: Namespaces22816
+Node: Classes26725
+Node: Declarations31370
+Node: Functions37423
+Node: Function Basics39954
+Node: Function Bodies46704
+Node: Expressions59742
+Node: Node Index82226
+Node: Function Index88590
+Node: Concept Index97435
+
+End Tag Table

@@ -1,0 +1,348 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html version="-//W3C//DTD HTML 3.2 Final//EN">
+<head>
+<title>UNIVAC 1100 Series Instruction Set</title>
+<meta name="keywords" content="UNIVAC, 1100, instruction, set, 1108, 1107, 1100">
+<meta name="description" content="UNIVAC 1100 Series Instruction Set">
+<meta name="author" content="John Walker">
+<meta name="robots" content="index">
+<meta name="robots" content="follow">
+</head>
+
+<body bgcolor="#FFFFFF">
+<h1>UNIVAC<sup>&reg;</sup> 1107/1108/1110 Instruction Set</h1>
+<pre>
+Colour code:  1107 and later
+              <font color="#B0B000">1107 only</font>
+              <font color="#0000FF">1108 and later</font>
+              <font color="#00A000">1108 only</font>
+              <font color="#FF0000">1110</font>
+              <font color="#FF00FF">1107 and 1110</font>
+
+Privileged (guard mode protected) instructions are shown in <i>italic</i>.
+
+<b>    F   J A SLEUTH II                                  SLEUTH I</b>
+
+   01 0-15  SA    Store A                              STP    Store Positive
+   02 0-15  SNA   Store Negative A                     STN    Store Negative
+   03 0-15  SMA   Store Magnitude A                    STM    Store Magnitude
+   04 0-15  SR    Store R                              STR    Store R
+   05 0-15  SZ    Store Zero                           STZ    Store Zero
+   06 0-15  SX    Store X                              STB    Store B
+<font color="#FF0000"><i>   07 00    SIA   Store Input Access Control Word
+   07 01    SOA   Store Output Access Control Word
+   07 02    SIP   Store Input Pointer Word
+   07 03    SOP   Store Output Pointer Word
+   07 04    LIA   Load Input Access Control Word
+   07 05    LOA   Load Output Access Control Word
+   07 06    LIP   Load Input Pointer Word
+   07 07    LOP   Load Output Pointer Word
+   07 10    LCB   Load Chain Base Register
+   07 11    LPI   Load Processor Input Pointer</i>
+   07 12    LDJ   Load D - Bank Base and Jump
+   07 13    LIJ   Load I - Bank Base and Jump
+   07 14 00 LPD   Load PSR Designators
+   07 14 01 SPD   Store PSR Designators
+<i>   07 16 00 LBR   Load Breakpoint Register
+   07 16 01 SJS   Store Jump Stack</i></font>
+
+   10 0-17  LA    Load A                               LDP    Load Positive
+   11 0-17  LNA   Load Negative A                      LDN    Load Negative
+   12 0-17  LMA   Load Magnitude A                     LDM    Load Magnitude
+   13 0-17  LNMA  Load Negative Magnitude A            LNM    Load Negative Magnitude
+   14 0-17  AA    Add to A                             ADD    Add
+   15 0-17  ANA   Add Negative A                       SUB    Subtract
+   16 0-17  AMA   Add Magnitude to A                   ADM    Add Magnitude
+   17 0-17  ANMA  Add Negative Magnitude to A          SBM    Subtract Magnitude
+
+   20 0-17  AU    Add Upper                            ADL    Add and Load
+   21 0-17  ANU   Add Negative Upper                   SBL    Subtract and Load
+   22 0-17  BT    Block Transfer                       BTR    Block Transfer
+   23 0-17  LR    Load R                               LDR    Load R
+   24 0-17  AX    Add to X                             ADB    Add to B
+   25 0-17  ANX   Add Negative to X                    SBB    Subtract from B
+   26 0-17  LXM   Load X Modifier                      LBM    Load B Modifier Only
+   27 0-17  LX    Load X                               LDB    Load B
+
+   30 0-17  MI    Multiply Integer                     MPI    Multiply Integer
+   31 0-17  MSI   Multiply Single Integer              MPS    Multiply Single
+   32 0-17  MF    Multiple Fractional                  MPF    Multiply Fractional
+<font color="#FF0000">   33 00    BM    Byte Move
+   33 01    BMT   Byte Move With Translate
+   33 02    BTT   Byte Translate and Test
+   33 03    BTC   Byte Translate and Compare
+   33 04    BC    Byte Compare
+   33 05    BPD   Byte to Packed Decimal Convert
+   33 06    PDB   Packed Decimal to Byte Convert
+   33 07    EDIT  Edit
+   33 10    BI    Byte to Binary Single Integer Convert
+   33 11    BDI   Byte to Binary Double Integer Convert
+   33 12    IB    Binary Single Integer to Byte Convert
+   33 13    DIB   Binary Double Integer to Byte Convert
+   33 14    BF    Byte to Single Floating Convert
+   33 15    BDF   Byte to Double Floating Convert
+   33 16    FB    Single Floating to Byte Convert
+   33 17    DFB   Double Floating to Byte Convert</font>
+   34 0-17  DI    Divide Integer                       DVI    Divide Integer
+   35 0-17  DSF   Divide Single Fractional             DVL    Divide Single and Load
+   36 0-17  DF    Divide Fractional                    DVF    Divide Fractional
+<font color="#FF0000">   37 00    QB    Quarter-Word Byte to Binary Compress
+   37 01    BQ    Binary to Quarter-Word Byte Extend
+   37 02    QBH   Quarter-Word Byte to Binary Halves Compress
+   37 03    BHQ   Binary Halves to Quarter-Word Byte Extend
+   37 04    QDB   Quarter-Word Byte to Double Binary Compress
+   37 05    DBQ   Double Binary to Quarter-Word Byte Extend
+   37 06    BA    Byte Add
+   37 07    BAN   Byte Add Negative</font>
+
+   40 0-17  OR    Logical OR                           SSE    Selective Set
+   41 0-17  XOR   Logical Exclusive OR                 SCP    Selective Complement
+   42 0-17  AND   Logical AND                          SCL    Selective Clear
+   43 0-17  MLU   Masked Load Upper                    SSU    Selective Substitute
+   44 0-17  TEP   Test Even Parity                     SEP    Selective Even Parity Test
+   45 0-17  TOP   Test Odd Parity                      SOP    Selective Odd Parity Test
+<font color="#0000FF">   46 0-17  LXI   Load X Increment</font>
+   47 0-17  TLEM  Test Less or Equal to Modifier       TMP    Test Modifier
+
+   50 0-17  TZ    Test for Zero                        TZR    Test Zero
+   51 0-17  TNZ   Test for Non Zero                    TNZ    Test Non Zero
+   52 0-17  TE    Test for Equal                       TEQ    Test Equal
+   53 0-17  TNE   Test for Not Equal                   TNE    Test Not Equal
+   54 0-17  TLE   Test for Less or Equal               TLE    Test Less Than or Equal
+   55 0-17  TG    Test for Greater                     TGR    Test Greater
+   56 0-17  TW    Test for Within Range                TWL    Test Within Limits
+   57 0-17  TNW   Test for Not Within Range            TOL    Test Outside Limits
+
+   60 0-17  TP    Test for Positive                    TPO    Test Positive
+   61 0-17  TN    Test for Negative                    TNG    Test Negative
+   62 0-17  SE    Search for Equal                     SEQ    Search Equal
+   63 0-17  SNE   Search for Not Equal                 SNE    Search Not Equal
+   64 0-17  SLE   Search for Less or Equal             SLE    Search Less Than or Equal
+   65 0-17  SG    Search for Greater                   SGR    Search Greater Than
+   66 0-17  SW    Search for Within Range              SWL    Search Within Limits
+   67 0-17  SNW   Search for Not Within Range          SOL    Search Outside Limits
+
+   70  *    JGD   Jump on Greater and Decrement        IXJP   Index Jump
+
+   71 00    MSE   Masked Search for Equal              MSEQ   Masked Search Equal
+   71 01    MSNE  Masked Search for Not Equal          MSNE   Masked Search Not Equal
+   71 02    MSLE  Masked Search for Less or Equal      MSLE   Masked Search Less than or Equal
+   71 03    MSG   Masked Search for Greater            MSGR   Masked Search Greater Than
+   71 04    MSW   Masked Search for Within Range       MSWL   Masked Search Within Limits
+   71 05    MSNW  Masked Search for Not Within Range   MSOL   Masked Search Outside Limits
+<font color="#0000FF">   71 06    MASL  Masked Alphanumeric Search Less Than or Equal
+   71 07    MASG  Masked Alphanumeric Search Greater
+
+   71 10    DA    Double Precision Fixed-Point Add
+   71 11    DAN   Double Precision Fixed-Point Add Negative
+   71 12    DS    Double Store A
+   71 13    DL    Double Load A
+   71 14    DLN   Double Load Negative A
+   71 15    DLM   Double Load Magnitude A
+   71 16    DJZ   Double Precision Jump Zero
+   71 17    DTE   Double Precision Test Equal</font>
+
+<font color="#B0B000"><i>   72 00    W     Wait                                 WAIT   Wait for Interrupt</i></font>
+   72 01    SLJ   Store Location and Jump              RTJP   Return Jump
+   72 02    JPS   Jump on Positive and Shift           PBJP   Positive Bit Control Jump
+   72 03    JNS   Jump on Negative and Shift           NBJP   Negative Bit Control Jump
+   72 04    AH    Add Halves                           ADDH   Add Halves
+   72 05    ANH   Add Negative Halves                  SUBH   Subtract Halves
+   72 06    AT    Add Thirds                           ADDT   Add Thirds
+   72 07    ANT   Add Negative Thirds                  SUBT   Subtract Thirds
+   72 10    EX    Execute                              EXRI   Execute Remote Instruction
+<font color="#B0B000"><i>   72 11    LL    Load Lockout Register                LMLR   Load Memory Lockout Register</i></font>
+<font color="#0000FF">   72 11    ER    Executive Return</font>
+<font color="#B0B000">   72 12    ETMJ  Enter Trace Mode and Jump            STMJ   Set Trace and Jump</font>
+<i>   72 13    PAIJ  Prevent all Interrupts and Jump      DIJP   Disable I/O Interrupts and Jump
+<font color="#0000FF">   72 14    SCN   Store Channel Number
+   72 15 00 LPS   Load Processor State Register
+<font color="#FF0000">   72 15 01 LMP   Load Main Processor State Register
+   72 15 02 LUP   Load Utility Processor State Register</font>
+   72 16 00 LSL   Load Storage Limits Register</font>
+<font color="#FF0000">   72 16 01 LUS   Load Utility Storage Limits Register
+   72 16 02 SL    Store Storage Limits Register
+   72 16 03 SUL   Store Utility Storage Limits Register</font></i>
+
+   73 00    SSC   Single Shift Circular                SCSH   Single Right Circular Shift
+   73 01    DSC   Double Shift Circular                DCSH   Double Right Circular Shift
+   73 02    SSL   Single Shift Logical                 SLSH   Single Right Logical Shift
+   73 03    DSL   Double Shift Logical                 DLSH   Double Right Logical Shift
+   73 04    SSA   Single Shift Algebraic               SASH   Single Right Arithmetic Shift
+   73 05    DSA   Double Shift Algebraic               SCSH   Double Right Arithmetic Shift
+   73 06    LSC   Load Shift and Count                 SFSH   Scale Factor Shift
+<font color="#0000FF">   73 07    DLSC  Double Load Shift and Count
+   73 10    LSSC  Left Single Shift Circular
+   73 11    LDSC  Left Double Shift Circular
+   73 12    LSSL  Left Single Shift Logical
+   73 13    LDSL  Left Double Shift Logical
+<i>   73 14 00 III   Initiate Interprocessor Interrupt 0
+   73 14 01 III   Initiate Interprocessor Interrupt 1
+<font color="#FF0000">   73 14 02 III   Initiate Interprocessor Interrupt 2
+   73 14 03 III   Initiate Interprocessor Interrupt 3
+   73 14 04 III   Initiate Interprocessor Interrupt 4
+   73 14 05 III   Initiate Interprocessor Interrupt 5</font>
+<font color="#003F00">   73 14 10 ALRM  Alarm</font>
+   73 14 11 EDC   Enable Day Clock
+   73 14 12 DDC   Disable Day Clock
+<font color="#FF0000">   73 14 13 SEC   Set and Enable Storage Reference Counters
+   73 14 14 EC    Enable Storage Reference Counters</font>
+   73 15    SIL   Select Interrupt Locations
+   73 16 00 LCR   Load Channel Select Register
+   73 16 01 LLA   Load Last Address Register</i>
+   73 17 00 TS    Test and Set</font>
+<font color="#FF0000">   73 17 01 TSS   Test and Set and Skip
+   73 17 02 TCS   Test and Clear and Skip</font>
+
+   74 00    JZ    Jump on Zero                         ZRJP   Zero Jump
+   74 01    JNZ   Jump on Non Zero                     NZJP   Non-Zero Jump
+   74 02    JP    Jump on Positive                     POJP   Positive Jump
+   74 03    JN    Jump on Negative                     NGJP   Negative Jump
+   74 04    J/JK  Jump [on Keys]                       CSJP/JUMP [Console Selective] Jump
+   74 05    HJ/HKJ Halt [on Keys] and Jump             SSJP   Selective Stop Jump
+   74 06    NOP   No Operation                         NOP    No Operation
+   74 07    AAIJ  Allow All Interrupts and Jump        EIJP   Enable I/O Interrupts and Jump
+   74 10    JNB   Jump on No Low Bit                   EVJP   Even Jump
+   74 11    JB    Jump on Low Bit                      ODJP   Odd Jump
+   74 12    JMGI  Jump Modifier Greater and Increment  MOJP   Modifier Jump
+   74 13    LMJ   Load Modifier and Jump               LMJP   Load Modifier and Jump
+   74 14    JO    Jump on Overflow                     OVJP   Overflow Jump
+   74 15    JNO   Jump on No Overflow                  NOJP   No Overflow Jump
+   74 16    JC    Jump on Carry                        CYJP   Carry Jump
+   74 17    JNC   Jump on No Carry                     NCJP   No Carry Jump
+
+<i>   75 00    LIC   Load Input Channel                   IIPM   Initiate Input Mode
+   75 01    LICM  Load Input Channel and Monitor
+                                                       IMIM   Initiate Monitored Input Mode
+   75 02    JIC   Jump on Input Channel Busy           IMJP   Input Mode Jump
+   75 03    DIC   Disconnect Input Channel             TIPM   Terminate Input Mode
+   75 04    LOC   Load Output Channel                  IOPM   Initiate Output Mode
+   75 05    LOCM  Load Output Channel and Monitor      IMOM   Initiate Monitored Output Mode
+   75 06    JOC   Jump on Output Channel Busy          OMJP   Output Mode Jump
+   75 07    DOC   Disconnect Output Channel            TOPM   Terminate Output Mode
+   75 10    LFC   Load Function in Channel             IFNM   Initiate Function Mode
+   75 11    LFCM  Load Function in Channel and Monitor IMFM   Initiate Monitored Function Mode
+   75 12    JFC   Jump on Function in Channel          FMJP   Function Mode Jump
+<font color="#B0B000">   75 13    AFC   Allow Function in Channel            FEXT   Force External Transfer</font>
+   75 14    AACI  Allow All Channel Interrupts         EAEI   Enable All External Interrupts
+   75 15    PACI  Prevent All Channel Interrupts       DAEI   Disable All External Interrupts
+<font color="#FF00FF">   75 16    ACI   Allow Channel Interrupt              ESEI   Enable Single External Interrupt
+   75 17    PCI   Prevent Channel Interrupt            DSEI   Disable Single External Interrupt</font></i>
+
+   76 00    FA    Floating Add                         FLAD   Floating Add
+   76 01    FAN   Floating Add Negative                FSUB   Floating Subtract
+   76 02    FM    Floating Multiply                    FLMP   Floating Multiply
+   76 03    FD    Floating Divide                      FLDV   Floating Divide
+   76 04    LUF   Load and Unpack Floating             FLUP   Floating Point Unpack
+   76 05    LCF   Load and Convert to Floating         FLNP   Floating Point Standardize Pack
+   76 06    MCDU  Magnitude of Characteristic          FLCM   Floating Characteristic
+                  Difference to Upper                         Difference Magnitude
+   76 07    CDU   Characteristic Difference to Upper   FLCD   Floating Characteristic Difference
+<font color="#0000FF">   76 10    DFA   Double Precision Floating Add
+   76 11    DFAN  Double Precision Floating Add Negative
+   76 12    DFM   Double Precision Floating Multiply
+   76 13    DFD   Double Precision Floating Divide
+   76 14    DFU   Double Load and Unpack Floating
+   76 15    DFP   Double Load and Convert to Floating
+   76 16    FEL   Floating Expand and Load
+   76 17    FCL   Floating Compress and Load</font>
+</pre>
+
+<h3>Notes</h3>
+
+<ol>
+<li>  SLEUTH I assembly language was used only on the UNIVAC 1107
+      EXEC I operating system.  SLEUTH II mnemonics, originally used
+      on the Computer Sciences Corporation 1107 Monitor System (later
+      called EXEC II) became the standard on all later machines.  From
+      the 1108 on, "SLEUTH" was dropped in favour of
+      "assembler".  "SLEUTH" was a rather pained acronym for
+      "<b>S</b>ymbolic <b>L</b>anguag<b>E</b> for the
+      <b>U</b>NIVAC 1107 <b>TH</b>in Film Computer".
+<p>
+<li>  The UNIVAC 1107 did not have guard mode (although the <a href="case1107.html">1107
+      at Case Institute of Technology</a> was modified to implement it).
+      On a standard 1107, user programs could execute instructions
+      marked as privileged.  1107-only instructions which were
+      documented as reserved for the exclusive use of the executive
+      system are shown in italics.
+<p>
+<li>  On some 1108s, the privileged ALRM and PACI instructions,
+      although generating a guard mode interrupt if executed in
+      user mode, actually sounded the alarm and prevented external
+      interrupts, respectively.  Field Change Orders were issued to
+      correct these hardware bugs.
+<p>
+<li>  The halt instructions (HJ and HKJ), if executed in guard mode
+      on the 1108 and later, would act as regular jump instructions and
+      not halt the processor.  A halt instruction, executed in privileged
+      mode on an 1108, would jump but not halt the processor if the
+      "Real-time" switch was set on the maintenance panel.
+<p>
+<li>  The Initiate Interprocessor Interrupt (III) instruction worked
+      differently on the 1108 and 1110.  On the 1108, which had a maximum
+      configuration of three processors, III 0 and 1 referred to the
+      other two CPUs, and thus which CPU was interrupted by a given III
+      code depended on the CPU on which it was executed.  On the 1110,
+      the A designator indicated the absolute processor (CAU -- Command/
+      Arithmetic Unit) number from 0 to 5, accommodating the maximum
+      1110 configuration of 6 processors.
+<p>
+<li>  The UNIVAC 1106 was absolutely identical to the 1108 in
+      instruction set.  Early 1106s were simply half-speed 1108s.
+      Later 1106s used different memory which was inherently slower
+      and cheaper than that of the 1108.
+<p>
+<li>  In order to sound more like IBM, in the 1970's UNIVAC redesignated all their
+      1100 series computers as 1100/xx, where xx was the model number.
+      The 1106 became the 1100/20 and the 1110 the 1100/40.  This was
+      purely a change in nomenclature; the architecture remained identical.
+<p>
+<li>  UNIVAC has been, over the years, a registered trademark of
+      Eckert-Mauchly Computer Corporation, Remington Rand
+      Corporation, Sperry Rand Corporation, Sperry Corporation,
+      and <a href="http://www.unisys.com/">Unisys Corporation</a>.
+</ol>
+
+
+<h3>References</h3>
+
+Sperry Rand Corporation, <cite>UNIVAC 1107 Central Computer</cite>,
+UP-2463 Rev. 2.  No date; this manual was obtained in 1967.
+<p>
+Sperry Rand Corporation, <cite>EXEC II Programmer's Guide</cite>,
+U-3671, 1963.  Page 2-9 lists the 1107 instructions reserved
+exclusively for the use of the EXEC II System.
+<p>
+Sperry Rand Corporation, <cite>SLEUTH II Programmer's Guide</cite>,
+UP-3670 Rev. 1.  No date; this manual was obtained in 1967.
+<p>
+Olson, Alan K., <cite>EXEC III</cite>, Report 1093, Andrew R. Jennings
+Computing Center, Case Institute of Technology, June 1966.  This describes the
+modifications made to the <a href="case1107.html">Case 1107</a> to implement guard mode.  Pages
+20 and 21 list the instructions prohibited when in guard mode.
+<p>
+Sperry Rand Corporation, <cite>UNIVAC 1108 Processor and Storage</cite>,
+UP-4053 Rev. 1, 1966, 1970.
+<p>
+Sperry Rand Corporation, <cite>UNIVAC 1110 System Description</cite>,
+UP-7841, 1970.
+<p>
+Frisch, Ronald D., <cite>UNIVAC 1110 System Hardware Overhead
+Manual</cite>.  I believe this was issued around 1970.
+This is a collection of copies of overhead transparencies describing the
+1110 architecture in detail, and bears no date, publication number, or
+copyright statement; "Ok to copy" is handwritten on the title page.
+
+<h3><a href="index.html">Back to UNIVAC Memories</a></h3>
+
+<p>
+<hr>
+<p>
+<address>
+Compiled by <a href="/">John Walker</a><br>
+July 31, 1996
+</address>
+
+</body>
+</html>

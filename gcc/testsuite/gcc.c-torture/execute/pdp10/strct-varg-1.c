@@ -1,0 +1,1 @@
+../strct-varg-1.c

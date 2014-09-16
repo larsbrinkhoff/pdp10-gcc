@@ -1,0 +1,84 @@
+This is cpp.info, produced by makeinfo version 4.0 from cpp.texi.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* Cpp: (cpp).		       The GNU C preprocessor.
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU C Preprocessor.
+
+   Copyright 1987, 1989, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
+1999, 2000, 2001 Free Software Foundation, Inc.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, provided also
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+Indirect:
+cpp.info-1: 924
+cpp.info-2: 49605
+cpp.info-3: 97705
+
+Tag Table:
+(Indirect)
+Node: Top924
+Node: Global Actions4095
+Node: Directives8762
+Node: Header Files10260
+Node: Header Uses10982
+Node: Include Syntax12469
+Node: Include Operation15492
+Node: Once-Only17356
+Node: Inheritance19531
+Node: System Headers22202
+Node: Macros23707
+Node: Object-like Macros24794
+Node: Function-like Macros27476
+Node: Macro Varargs33694
+Node: Predefined36949
+Node: Standard Predefined37377
+Node: Nonstandard Predefined46029
+Node: Stringification49605
+Node: Concatenation52526
+Node: Undefining55475
+Node: Redefining56514
+Node: Poisoning58171
+Node: Macro Pitfalls59176
+Node: Misnesting60272
+Node: Macro Parentheses61279
+Node: Swallow Semicolon63143
+Node: Side Effects65056
+Node: Self-Reference66754
+Node: Argument Prescan68975
+Node: Cascaded Macros73911
+Node: Newlines in Args75060
+Node: Conditionals76101
+Node: Conditional Uses77392
+Node: Conditional Syntax78815
+Node: #if Directive79401
+Node: #else Directive81763
+Node: #elif Directive82428
+Node: Deleted Code83806
+Node: Conditionals-Macros84865
+Node: #error Directive88911
+Node: Assertions90528
+Node: Line Control94800
+Node: Other Directives97705
+Node: Output100952
+Node: Implementation102654
+Node: Unreliable Features107261
+Node: Invocation113075
+Node: Concept Index133531
+Node: Index137136
+
+End Tag Table

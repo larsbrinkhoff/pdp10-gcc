@@ -1,0 +1,20 @@
+# The rule to use to build libgcc1.a.
+LIBGCC1 = libgcc1-asm.a
+
+# The rule to use to build libgcc1.a when building a cross compiler.
+CROSS_LIBGCC1 = libgcc1-asm.a
+
+# Just for these, we omit the frame pointer since it makes such a big
+# difference.  It is then pointless adding debugging.
+TARGET_LIBGCC2_CFLAGS = -fomit-frame-pointer -fPIC -DUNDERSCORE=.
+LIBGCC2_DEBUG_CFLAGS = -g0
+
+# Since libgcc1 is an assembler file, we can build it automatically for the
+# cross-compiler.
+LIB1ASMSRC = pdp10/libgcc1.s
+LIB1ASMFUNCS = _udivsi3 _umodsi3 _adddf3 _subdf3 _negdf2 _muldf3 _divdf3 \
+	_eqdf2 _nedf2 _gtdf2 _gedf2 _ltdf2 _ledf2 _fixsfsi _fixdfsi	 \
+	_floatsisf _floatsidf BADL6 BADL7 BADL8 BADL9 BADLH BADX6	 \
+	BADX7 BADX9 BADXH
+
+MULTILIB_OPTIONS	= mregparm=0/mregparm=7

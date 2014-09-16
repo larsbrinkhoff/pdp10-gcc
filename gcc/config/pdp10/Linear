@@ -1,0 +1,121 @@
+/*
+global char9 *
+
+	;Pointer in AC.
+	TLZN AC,020000
+	 TRZ AC,400000
+	TLZN AC,010000
+	 TRZ AC,200000
+	TLZ  AC,100000
+	ROT  AC,2
+	;Linear address in AC.
+	;6 instructions.
+	;No temporaries.
+
+	;Pointer in AC.
+	MOVE T,AC
+	LSH  T,-36
+	LSH  AC,2
+	ADDI AC,-70(T)
+	TLZ  AC,770000
+	;Linear address in AC.
+	;5 instructions.
+	;One temporary, arbitrarily chosen accumulator.
+
+	;Linear address in AC.
+	MOVE T,AC
+	ANDI T,3
+	LSH  T,14
+	LSH  AC,-2
+	TLO  AC,700000(T)
+	;Pointer in AC.
+
+global char8 *
+
+	MOVE T,AC
+	LSH  T,-36
+	LSH  AC,2
+	ADDI AC,-55(T)
+	TLZ  AC,770000
+
+global short *
+
+	MOVE T,AC
+	LSH  T,-35
+	LSH  AC,2
+	ADDI AC,-172(T)
+	TLZ  AC,770000
+
+	MOVE T,AC
+	ANDI T,2
+	LSH  T,13
+	LSH  AC,-2
+	TLO  AC,750000(T)
+
+int *
+
+	;Pointer in AC.
+	LSH AC,2
+	;Linear address in AC.
+
+local char9/char8 *
+
+	MOVE T,AC
+	LSH  T,-41
+	LSH  AC,2
+	SUBI AC,-3(T)
+	TLZ  AC,777700
+
+local short *
+
+	MOVE T,AC
+	LSH  T,-41
+	LSH  AC,2
+	SUBI AC,-2(T)
+	TLZ  AC,777700
+*/
+
+typedef unsigned char8 __attribute__ ((size (8)));
+
+unsigned char8p_to_unsigned (const char8 *p)
+{
+  unsigned x = (unsigned)p;
+  x = (x << 2) + (((x >> 30) - 055) & 0777777);
+  return x & 07777777777;
+}
+
+char8 *unsigned_to_char8p (unsigned x)
+{
+  unsigned tmp = (x & 3) << 12;
+  asm ("tlo %0,55000(%2)" : "=r" (x) : "0" (x >> 2), "r" (tmp));
+  return (char *)x;
+}
+
+unsigned char9p_to_unsigned (const char *p)
+{
+  unsigned x = (unsigned)p;
+  x = (x << 2) + (((x >> 30) - 070) & 0777777);
+  return x & 07777777777;
+}
+
+char *unsigned_to_char9p (unsigned x)
+{
+  unsigned tmp = (x & 3) << 12;
+  x = (x >> 2) | (tmp + 0700000) << 18;
+  //asm ("tlo %0,70000(%2)" : "=r" (x) : "0" (x >> 2), "r" (tmp));
+  return (char *)x;
+}
+
+unsigned shortp_to_unsigned (const short *p)
+{
+  unsigned x = (unsigned)p;
+  x = (x << 2) + (((x >> 29) - 0172) & 0777777);
+  return x & 07777777777;
+}
+
+short *unsigned_to_shortp (unsigned x)
+{
+  unsigned tmp = (x & 2) << 11;
+  asm ("tlo %0,70000(%2)" : "=r" (x) : "0" (x >> 2), "r" (tmp));
+  return (short *)x;
+}

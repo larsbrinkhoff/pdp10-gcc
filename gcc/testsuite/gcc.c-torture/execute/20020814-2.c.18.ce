@@ -1,0 +1,131 @@
+
+;; Function f
+
+(note 2 0 3 NOTE_INSN_DELETED)
+
+(note 3 2 27 NOTE_INSN_FUNCTION_BEG)
+
+;; Start of basic block 0, registers live: 14 [16] 15 [17] 16 [<ap>]
+(note 27 3 12 [bb 0] NOTE_INSN_BASIC_BLOCK)
+
+(insn 12 27 19 (set (reg:SI 23)
+        (const:SI (plus:SI (symbol_ref:SI ("a"))
+                (const_int -5368709121 [0xfffffffebfffffff])))) 88 {*movsi_cache} (nil)
+    (expr_list:REG_EQUAL (const:SI (plus:SI (symbol_ref:SI ("a"))
+                (const_int -5368709121 [0xfffffffebfffffff])))
+        (nil)))
+
+(note 19 12 23 NOTE_INSN_FUNCTION_END)
+
+(insn 23 19 26 (set (reg/i:SI 1 1)
+        (reg:SI 23)) 88 {*movsi_cache} (insn_list 12 (nil))
+    (expr_list:REG_DEAD (reg:SI 23)
+        (expr_list:REG_EQUAL (const:SI (plus:SI (symbol_ref:SI ("a"))
+                    (const_int -5368709121 [0xfffffffebfffffff])))
+            (nil))))
+
+(insn 26 23 0 (use (reg/i:SI 1 1)) -1 (insn_list 23 (nil))
+    (nil))
+;; End of basic block 0, registers live:
+ 1 [1] 14 [16] 15 [17] 16 [<ap>]
+
+
+;; Function main
+
+
+IF-THEN block found, start 0, then 1, join 2
+
+1 possible IF blocks searched.
+0 IF blocks converted.
+0 basic blocks deleted.
+
+
+(note 2 0 3 NOTE_INSN_DELETED)
+
+(note 3 2 51 NOTE_INSN_FUNCTION_BEG)
+
+;; Start of basic block 0, registers live: 14 [16] 15 [17] 16 [<ap>]
+(note 51 3 7 [bb 0] NOTE_INSN_BASIC_BLOCK)
+
+(call_insn 7 51 8 (call (mem:SI (symbol_ref:SI ("__main")) [0 S4 A36])
+        (const_int 0 [0x0])) 308 {*call_symbol} (nil)
+    (expr_list:REG_EH_REGION (const_int 0 [0x0])
+        (nil))
+    (nil))
+
+(note 8 7 19 0x30084740 NOTE_INSN_BLOCK_BEG)
+
+(call_insn 19 8 21 (set (reg:SI 1 1)
+        (call (mem:SI (symbol_ref/v:SI ("f")) [0 S4 A36])
+            (const_int 0 [0x0]))) 312 {*call_value_symbol} (nil)
+    (expr_list:REG_EH_REGION (const_int 0 [0x0])
+        (nil))
+    (nil))
+
+(insn 21 19 24 (set (reg/v/f:SI 24)
+        (reg:SI 1 1)) 88 {*movsi_cache} (insn_list 19 (nil))
+    (expr_list:REG_DEAD (reg:SI 1 1)
+        (nil)))
+
+(insn 24 21 26 (set (reg:SI 26)
+        (unspec:SI[ 
+                (reg/v/f:SI 24)
+                (const_int 1 [0x1])
+            ]  1)) 293 {ADJBP} (insn_list 21 (nil))
+    (expr_list:REG_DEAD (reg/v/f:SI 24)
+        (nil)))
+
+(note 26 24 27 NOTE_INSN_DELETED)
+
+(note 27 26 28 NOTE_INSN_DELETED)
+
+(jump_insn 28 27 52 (set (pc)
+        (if_then_else (eq (subreg:SI (mem:QI (reg:SI 26) [0 S1 A9]) 0)
+                (const_int 42 [0x2a]))
+            (label_ref 34)
+            (pc))) 320 {cbranchsi} (insn_list 24 (nil))
+    (expr_list:REG_DEAD (reg:SI 26)
+        (expr_list:REG_BR_PROB (const_int 2900 [0xb54])
+            (nil))))
+;; End of basic block 0, registers live:
+ 14 [16] 15 [17] 16 [<ap>]
+
+;; Start of basic block 1, registers live: 14 [16] 15 [17] 16 [<ap>]
+(note 52 28 32 [bb 1] NOTE_INSN_BASIC_BLOCK)
+
+(call_insn 32 52 33 (call (mem:SI (symbol_ref:SI ("abort")) [0 S4 A36])
+        (const_int 0 [0x0])) 308 {*call_symbol} (nil)
+    (expr_list:REG_NORETURN (const_int 0 [0x0])
+        (nil))
+    (nil))
+;; End of basic block 1, registers live:
+ 14 [16] 15 [17] 16 [<ap>]
+
+(barrier 33 32 34)
+
+;; Start of basic block 2, registers live: 14 [16] 15 [17] 16 [<ap>]
+(code_label 34 33 53 3 "" "" [1 uses])
+
+(note 53 34 39 [bb 2] NOTE_INSN_BASIC_BLOCK)
+
+(insn 39 53 40 (set (reg:SI 1 1)
+        (const_int 0 [0x0])) 88 {*movsi_cache} (nil)
+    (expr_list:REG_EQUAL (const_int 0 [0x0])
+        (nil)))
+
+(call_insn 40 39 41 (call (mem:SI (symbol_ref:SI ("exit")) [0 S4 A36])
+        (const_int 0 [0x0])) 308 {*call_symbol} (insn_list 39 (nil))
+    (expr_list:REG_DEAD (reg:SI 1 1)
+        (expr_list:REG_NORETURN (const_int 0 [0x0])
+            (nil)))
+    (expr_list (use (reg:SI 1 1))
+        (nil)))
+;; End of basic block 2, registers live:
+ 14 [16] 15 [17] 16 [<ap>]
+
+(barrier 41 40 42)
+
+(note 42 41 43 0x30084740 NOTE_INSN_BLOCK_END)
+
+(note 43 42 0 NOTE_INSN_FUNCTION_END)
+

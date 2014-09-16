@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case x"$1" in
+x-o)
+    file="$2";;
+*)
+    file="$1";;
+esac
+
+grep '^	ENTRY' "$file" > /tmp/entry.$$
+grep -v '^	ENTRY' "$file" > /tmp/noentry.$$
+cat /tmp/entry.$$ /tmp/noentry.$$ > "$file"
+exit 0
+
+# specs entry:
+#
+# *invoke_as:
+# %{!S:-o %g.s}
+#  move-entry %{S:%W{o*}%{!o*:-o %b.s}}%{!S:%g.s}
+# %{!S: as %(asm_options) %g.s %A }

@@ -1,0 +1,1 @@
+../strct-pack-2.c

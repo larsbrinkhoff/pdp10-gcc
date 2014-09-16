@@ -1,0 +1,1 @@
+../string-opt-6.c

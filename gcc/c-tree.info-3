@@ -1,0 +1,219 @@
+This is c-tree.info, produced by makeinfo version 4.0 from c-tree.texi.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* c-tree: (c-tree).            C/C++ Internal Representation
+END-INFO-DIR-ENTRY
+   This manual documents the internal representation used by GCC to
+represent C and C++ source programs.
+
+   Copyright (c) 1999, 2000, 2001 Free Software Foundation, Inc.
+
+
+File: c-tree.info,  Node: Function Index,  Next: Concept Index,  Prev: Node Index,  Up: Top
+
+Function Index
+**************
+
+* Menu:
+
+* ARITHMETIC_TYPE_P:                     Types.
+* ASM_CLOBBERS:                          Function Bodies.
+* ASM_CV_QUAL:                           Function Bodies.
+* ASM_INPUTS:                            Function Bodies.
+* ASM_OUTPUTS:                           Function Bodies.
+* ASM_STRING:                            Function Bodies.
+* BINFO_TYPE:                            Classes.
+* CLASS_TYPE_P:                          Types.
+* CLASSTYPE_DECLARED_CLASS:              Classes.
+* CLASSTYPE_HAS_MUTABLE:                 Classes.
+* CLASSTYPE_NON_POD_P:                   Classes.
+* CLEANUP_DECL:                          Function Bodies.
+* CLEANUP_EXPR:                          Function Bodies.
+* COMPOUND_BODY:                         Function Bodies.
+* CP_INTEGRAL_TYPE:                      Types.
+* cp_namespace_decls:                    Namespaces.
+* CP_TYPE_CONST_NON_VOLATILE_P:          Types.
+* CP_TYPE_CONST_P:                       Types.
+* CP_TYPE_QUALS:                         Types.
+* CP_TYPE_RESTRICT_P:                    Types.
+* CP_TYPE_VOLATILE_P:                    Types.
+* DECL_ALIGN:                            Declarations.
+* DECL_ANTICIPATED:                      Function Basics.
+* DECL_ARGUMENTS:                        Function Basics.
+* DECL_ARRAY_DELETE_OPERATOR_P:          Function Basics.
+* DECL_ARTIFICIAL <1>:                   Function Basics.
+* DECL_ARTIFICIAL:                       Declarations.
+* DECL_ASSEMBLER_NAME:                   Function Basics.
+* DECL_BASE_CONSTRUCTOR_P:               Function Basics.
+* DECL_CLASS_SCOPE_P:                    Declarations.
+* DECL_COMPLETE_CONSTRUCTOR_P:           Function Basics.
+* DECL_COMPLETE_DESTRUCTOR_P:            Function Basics.
+* DECL_CONST_MEMFUNC_P:                  Function Basics.
+* DECL_CONSTRUCTOR_P:                    Function Basics.
+* DECL_CONTEXT:                          Namespaces.
+* DECL_CONV_FN_P:                        Function Basics.
+* DECL_COPY_CONSTRUCTOR_P:               Function Basics.
+* DECL_DESTRUCTOR_P:                     Function Basics.
+* DECL_EXTERN_C_FUNCTION_P:              Function Basics.
+* DECL_EXTERNAL <1>:                     Function Basics.
+* DECL_EXTERNAL:                         Declarations.
+* DECL_FUNCTION_MEMBER_P:                Function Basics.
+* DECL_FUNCTION_SCOPE_P:                 Declarations.
+* DECL_GLOBAL_CTOR_P:                    Function Basics.
+* DECL_GLOBAL_DTOR_P:                    Function Basics.
+* DECL_INITIAL:                          Declarations.
+* DECL_LINKONCE_P:                       Function Basics.
+* DECL_LOCAL_FUNCTION_P:                 Function Basics.
+* DECL_MAIN_P:                           Function Basics.
+* DECL_NAME <1>:                         Function Basics.
+* DECL_NAME <2>:                         Declarations.
+* DECL_NAME:                             Namespaces.
+* DECL_NAMESPACE_ALIAS:                  Namespaces.
+* DECL_NAMESPACE_SCOPE_P:                Declarations.
+* DECL_NAMESPACE_STD_P:                  Namespaces.
+* DECL_NON_THUNK_FUNCTION_P:             Function Basics.
+* DECL_NONCONVERTING_P:                  Function Basics.
+* DECL_NONSTATIC_MEMBER_FUNCTION_P:      Function Basics.
+* DECL_OVERLOADED_OPERATOR_P:            Function Basics.
+* DECL_RESULT:                           Function Basics.
+* DECL_SIZE:                             Declarations.
+* DECL_SOURCE_FILE:                      Declarations.
+* DECL_SOURCE_LINE:                      Declarations.
+* DECL_STATIC_FUNCTION_P:                Function Basics.
+* DECL_STMT_DECL:                        Function Bodies.
+* DECL_THUNK_P:                          Function Basics.
+* DECL_VOLATILE_MEMFUNC_P:               Function Basics.
+* DO_BODY:                               Function Bodies.
+* DO_COND:                               Function Bodies.
+* ELSE_CLAUSE:                           Function Bodies.
+* EXPR_STMT_EXPR:                        Function Bodies.
+* FOR_BODY:                              Function Bodies.
+* FOR_COND:                              Function Bodies.
+* FOR_EXPR:                              Function Bodies.
+* FOR_INIT_STMT:                         Function Bodies.
+* GLOBAL_INIT_PRIORITY:                  Function Basics.
+* GOTO_DESTINATION:                      Function Bodies.
+* HANDLER_BODY:                          Function Bodies.
+* HANDLER_PARMS:                         Function Bodies.
+* IDENTIFIER_LENGTH:                     Identifiers.
+* IDENTIFIER_OPNAME_P:                   Identifiers.
+* IDENTIFIER_POINTER:                    Identifiers.
+* IDENTIFIER_TYPENAME_P:                 Identifiers.
+* IF_COND:                               Function Bodies.
+* LOCAL_CLASS_P:                         Classes.
+* OVL_CURRENT:                           Functions.
+* OVL_NEXT:                              Functions.
+* PTRMEM_CST_CLASS:                      Expressions.
+* PTRMEM_CST_MEMBER:                     Expressions.
+* RETURN_EXPR:                           Function Bodies.
+* same_type_p:                           Types.
+* SCOPE_BEGIN_P:                         Function Bodies.
+* SCOPE_END_P:                           Function Bodies.
+* SCOPE_NULLIFIED_P:                     Function Bodies.
+* START_CATCH_TYPE:                      Function Bodies.
+* STMT_IS_FULL_EXPR_P:                   Function Bodies.
+* STMT_LINENO:                           Function Bodies.
+* SUBOBJECT_CLEANUP:                     Function Bodies.
+* SWITCH_BODY:                           Function Bodies.
+* SWITCH_COND:                           Function Bodies.
+* THEN_CLAUSE:                           Function Bodies.
+* THUNK_DELTA:                           Declarations.
+* TREE_CODE:                             Overview.
+* tree_int_cst_equal:                    Expressions.
+* TREE_INT_CST_HIGH:                     Expressions.
+* TREE_INT_CST_LOW:                      Expressions.
+* tree_int_cst_lt:                       Expressions.
+* TREE_OPERAND:                          Expressions.
+* TREE_PUBLIC:                           Function Basics.
+* TREE_PURPOSE:                          Containers.
+* TREE_STRING_LENGTH:                    Expressions.
+* TREE_STRING_POINTER:                   Expressions.
+* TREE_TYPE <1>:                         Expressions.
+* TREE_TYPE <2>:                         Function Basics.
+* TREE_TYPE <3>:                         Declarations.
+* TREE_TYPE:                             Types.
+* TREE_VALUE:                            Containers.
+* TREE_VEC_ELT:                          Containers.
+* TREE_VEC_LENGTH:                       Containers.
+* TREE_VIA_PRIVATE:                      Classes.
+* TREE_VIA_PROTECTED:                    Classes.
+* TREE_VIA_PUBLIC:                       Classes.
+* TRY_HANDLERS:                          Function Bodies.
+* TRY_STMTS:                             Function Bodies.
+* TYPE_ALIGN:                            Types.
+* TYPE_ARG_TYPES:                        Types.
+* TYPE_BINFO:                            Classes.
+* TYPE_BUILT_IN:                         Types.
+* TYPE_CONTEXT:                          Types.
+* TYPE_FIELDS <1>:                       Classes.
+* TYPE_FIELDS:                           Types.
+* TYPE_HAS_ARRAY_NEW_OPERATOR:           Classes.
+* TYPE_HAS_DEFAULT_CONSTRUCTOR:          Classes.
+* TYPE_HAS_MUTABLE_P:                    Classes.
+* TYPE_HAS_NEW_OPERATOR:                 Classes.
+* TYPE_MAIN_VARIANT:                     Types.
+* TYPE_METHOD_BASETYPE:                  Types.
+* TYPE_METHODS:                          Classes.
+* TYPE_NAME:                             Types.
+* TYPE_NOTHROW_P:                        Function Basics.
+* TYPE_OFFSET_BASETYPE:                  Types.
+* TYPE_OVERLOADS_ARRAY_REF:              Classes.
+* TYPE_OVERLOADS_ARROW:                  Classes.
+* TYPE_OVERLOADS_CALL_EXPR:              Classes.
+* TYPE_POLYMORPHIC_P:                    Classes.
+* TYPE_PRECISION:                        Types.
+* TYPE_PTR_P:                            Types.
+* TYPE_PTRFN_P:                          Types.
+* TYPE_PTRMEM_P:                         Types.
+* TYPE_PTROB_P:                          Types.
+* TYPE_PTROBV_P:                         Types.
+* TYPE_QUAL_CONST:                       Types.
+* TYPE_QUAL_RESTRICT:                    Types.
+* TYPE_QUAL_VOLATILE:                    Types.
+* TYPE_RAISES_EXCEPTIONS:                Function Basics.
+* TYPE_SIZE:                             Types.
+* TYPE_UNQUALIFIED:                      Types.
+* TYPE_VFIELD:                           Classes.
+* TYPENAME_TYPE_FULLNAME:                Types.
+* WHILE_BODY:                            Function Bodies.
+* WHILE_COND:                            Function Bodies.
+
+
+File: c-tree.info,  Node: Concept Index,  Prev: Function Index,  Up: Top
+
+Concept Index
+*************
+
+* Menu:
+
+* array:                                 Types.
+* assignment operator:                   Function Basics.
+* class:                                 Classes.
+* constructor:                           Function Basics.
+* container:                             Containers.
+* copy constructor:                      Function Basics.
+* declaration:                           Declarations.
+* destructor:                            Function Basics.
+* expression:                            Expressions.
+* function:                              Functions.
+* function body:                         Function Bodies.
+* fundamental type:                      Types.
+* identifier:                            Identifiers.
+* linkage:                               Function Basics.
+* list:                                  Containers.
+* name:                                  Identifiers.
+* namespace:                             Namespaces.
+* namespace, class, scope:               Scopes.
+* pointer:                               Types.
+* qualified type:                        Types.
+* reference:                             Types.
+* statements:                            Function Bodies.
+* tree <1>:                              Trees.
+* tree:                                  Overview.
+* type:                                  Types.
+* type declaration:                      Declarations.
+* variable:                              Declarations.
+* vector:                                Containers.
+
+

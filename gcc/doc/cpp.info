@@ -1,0 +1,86 @@
+This is doc/cpp.info, produced by makeinfo version 4.1 from
+doc/cpp.texi.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* Cpp: (cpp).		       The GNU C preprocessor.
+END-INFO-DIR-ENTRY
+
+
+Indirect:
+cpp.info-1: 191
+cpp.info-2: 49266
+cpp.info-3: 97375
+cpp.info-4: 143069
+cpp.info-5: 191805
+
+Tag Table:
+(Indirect)
+Node: Top191
+Node: Overview2840
+Node: Initial processing5208
+Node: Tokenization11402
+Ref: Tokenization-Footnote-118451
+Node: The preprocessing language18562
+Node: Header Files21435
+Node: Include Syntax23313
+Node: Include Operation24815
+Node: Search Path26668
+Node: Once-Only Headers29518
+Node: Computed Includes31172
+Node: Wrapper Headers34311
+Node: System Headers36730
+Node: Macros38787
+Node: Object-like Macros39925
+Node: Function-like Macros43511
+Node: Macro Arguments45121
+Node: Stringification49266
+Node: Concatenation52467
+Node: Variadic Macros55581
+Node: Predefined Macros59918
+Node: Standard Predefined Macros60501
+Node: Common Predefined Macros65923
+Node: System-specific Predefined Macros72503
+Node: C++ Named Operators74515
+Node: Undefining and Redefining Macros75470
+Node: Directives Within Macro Arguments77567
+Node: Macro Pitfalls79114
+Node: Misnesting79640
+Node: Operator Precedence Problems80741
+Node: Swallowing the Semicolon82596
+Node: Duplication of Side Effects84608
+Node: Self-Referential Macros86780
+Node: Argument Prescan89190
+Node: Newlines in Arguments92933
+Node: Conditionals93878
+Node: Conditional Uses95707
+Node: Conditional Syntax97060
+Node: Ifdef97375
+Node: If100541
+Node: Defined102954
+Node: Else104227
+Node: Elif104788
+Node: Deleted Code106068
+Node: Diagnostics107310
+Node: Line Control108927
+Node: Pragmas112734
+Node: Other Directives117002
+Node: Preprocessor Output118196
+Node: Traditional Mode121396
+Node: Implementation Details126947
+Node: Implementation-defined behavior127569
+Node: Implementation limits129842
+Node: Obsolete Features132549
+Node: Assertions133036
+Node: Obsolete once-only headers135567
+Node: Miscellaneous obsolete features137335
+Node: Differences from previous versions138557
+Node: Invocation143069
+Ref: -MF150739
+Node: Environment Variables163722
+Node: GNU Free Documentation License166610
+Node: Index of Directives186515
+Node: Option Index187895
+Node: Concept Index191805
+
+End Tag Table

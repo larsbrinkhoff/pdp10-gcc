@@ -1,0 +1,184 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; From DECsystem-10 / DECSYSTEM-20 Processor Reference Manual (June, 1982)
+
+	JFCL	17,.+1		;Clear flags
+	JRST	.+1		;Change PC
+	JFCL	1,PDP6		;PDP-6 has PC Change flag
+	MOVNI	AC,1		;Others do not.  Make AC all 1s
+	AOBJN	AC,.+1		;Increment both halves
+	JUMPN	AC,KA10		;KA10 if AC = 1000000 (carry
+	BLT	AC,0		;between halves)
+	JUMPE	AC,KI10		;KI10 if AC = 0
+	MOVEI	AC,1		;KL10 or KS10 if AC= 1,,1
+	SETZ	AC+1,		;Big binary integer
+	MOVEI	AC+3,1		;One digit byte
+	EXTEND	AC,[CVTBDO]	;Convert will abort
+	TLNE	AC+3,200000	;Test effect on N
+	JRST	KL10		;KL10 if N set
+	JRST	KS10		;KS10 if N unaffected
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; From ITS source code (?, ?)
+
+cpufnd:	jfcl 17,.+1	; Clear flags
+	jrst .+1	; Change PC
+	jfcl 1,[movei a,.cpu6	; PDP-6 has PC change flag
+		ret]
+	movni a,1	; Make AC all 1's
+	aobjn a,.+1	; Increment both halves
+	jumpn a,[	; KA if AC = 1,,0
+		move a,[010700,,-1]	; but perhaps also Foonly F-2 or F-3...
+		ibp a
+		tlne a,17		; Ensure X not overflowed into
+		 jrst [	movei a,.cpuka	; Overflow = KA
+			ret]
+		movei a,.cpuf2
+		ret]
+	; KI, KL or KS if AC = 0 (no carry)
+	blt a,
+	jumpe a,[movei a,.cpuki	; KI if AC not = 1,,1
+		ret]
+
+	; Either a KL or KS.  Perform IDIV test.
+	push p,b
+	movsi a,(setz)		; Set up -2^35 as dividend
+	seto b,			; Set up -1 as divisor
+	idivm a,b		; KL gets error, doesn't do it....
+	came b,[-1]		; So if B remains same, it's a KL.
+	 skipa a,[.cpuks]	; B got clobbered, it's a KS-10!
+	  movei a,.cpukl
+	pop p,b
+	ret
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; From TOAD-1 System Architecture Reference Manual (April, 1997)
+
+	JFCL	17,.+1		;Clear flags
+	JRST	.+1		;Change PC
+	JFCL	1,PDP6		;PDP-6 has PC Change flag
+	MOVNI	AC,1		;Others do not.  Make AC all 1s
+	AOBJN	AC,.+1		;Increment both halves
+	JUMPN	AC,KA10		;KA10 carries to left half
+	BLT	AC,0		;Try BLT.  Source=0; Dest=0.  AC must not be 0
+	JUMPE	AC,KI10		;KI10 if AC = 0
+	MOVSI	AC,400000	;Largest negative number
+	ADJBP	AC,[430100,,0]	;Check what this does
+	CAMN	AC,[430100,,0]	;The KL won't change this
+	JRST	KL10		;This must be a KL10
+	MOVSI	AC,450000	;A one-word global byte pointer
+	IBP	AC		;What does this do?
+	CAME	AC,[450000,,0]	;The KS doesn't change this
+	JRST	XKL1		;This must be an XKL-1
+	JRST	KS10		;Otherwise, it's a KS10
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Misc PDP-6 vs KA10 tests
+
+	; PDP-6 has no Floating Overflow (JFCL 1,)
+
+	; PDP-6 has no Floating Underflow
+
+	JFCL	17,.+1		;Clear flags
+	MOVEI	AC,[400000,,0]	;-2^35
+	IDIVI	AC,2		;Divide by two
+	JFCL	10,PDP6		;PDP-6 if overflow
+
+	MOVEI	AC,[1,,[12345]]	;Initialize stack pointer
+	POP	AC,AC		;Try this
+	CAIN	AC,12345
+	 JUMPE	AC,KA10		;KA10 if AC receives word from stack
+	TLNE	AC,-1
+	 JRST	PDP6		;PDP-6 if AC receives decremented pointer
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; From: Mark Crispin <mrc@CAC.Washington.EDU>
+; Date: Sun, 29 Sep 2002 16:18:31 -0700
+; Newsgroups: alt.sys.pdp10
+; Subject: GETCPU.MAC
+
+	TITLE GETCPU Get CPU type
+
+T1==:1
+T2==:2
+P==:17
+
+	; 1-10 for DEC (R.I.P.)
+$CP166==:1			; PDP-6
+$CPKA==:2			; KA10
+$CPKI==:3			; KI10
+$CPKL==:4			; KL10
+$CPKS==:5			; KS10
+	; 10-19 for Foonly (R.I.P.)
+$CPFO2==:11			; Foonly F2
+	; 20-29 for Systems Concepts
+	; 30-39 for XKL
+$CPXK1==:30			; XKL TOAD-1
+	; 40-49 for KLH10
+$CPKHL==:40			; KLH KN10-KL
+
+
+; Get CPU type
+;	PUSHJ P,GETCPU
+; T1/ CPU type code
+; This routine is designed to be easy to modify/extend at the cost of some
+; code size.
+
+GETCPU::PUSH P,T2
+	PUSHJ P,GETCP0
+	POP P,T2
+	POPJ P,
+
+GETCP0:	JFCL 17,.+1		; Clear flags
+	JRST .+1		; Change PC
+	JFCL 1,GTC166		; PDP-6 has PC Change flag
+	SETO T1,		; AOBJN of -1
+	AOBJN T1,.+1		; KA10 and Foonly F2 carries to left half
+	JUMPE T1,GETCP1
+	HRLOI T1,010700		; IBP of EA = -1
+	IBP T1
+	TLNE T1,17		; KA10 overflows
+	 JRST GTCKA
+	JRST GTCFO2		;;; assume Foonly F2
+
+; Here with T1/0, always
+GETCP1:	BLT T1,0		; T1 must not be 0
+	JUMPE T1,GTCKI
+	MOVSI T1,400000		; ADJBP of normalized pointer by SETZ
+	ADJBP T1,[430100,,0]
+	CAMN T1,[430100,,0]	; KL10 leaves unchanged pointer
+	 JRST GTCKL
+	MOVSI T1,450000		; IBP of OWGBP
+	IBP T1
+	CAMN T1,[450000,,0]	; KS10 doesn't do OWGBPs
+	 JRST GTCKS
+	MOVSI T1,400000		; SETZ divided by -1
+	SETO T2,
+	IDIVM T1,T2		; KLH-KL gets error and don't modify T2
+	AOJE T2,GTCKHL
+	JRST GTCXK1		;;; assume XKL-1
+
+GTC166:	MOVEI T1,$CP166
+	POPJ P,
+
+GTCKA:	MOVEI T1,$CPKA
+	POPJ P,
+
+GTCKI:	MOVEI T1,$CPKI
+	POPJ P,
+
+GTCKL:	MOVEI T1,$CPKL
+	POPJ P,
+
+GTCKS:	MOVEI T1,$CPKS
+	POPJ P,
+
+GTCFO2:	MOVEI T1,$CPFO2
+	POPJ P,
+
+GTCKHL:	MOVEI T1,$CPKHL
+	POPJ P,
+
+GTCXK1:	MOVEI T1,$CPXK1
+	POPJ P,
+
+	END

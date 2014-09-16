@@ -1,0 +1,183 @@
+
+;; Function f
+
+0 registers.
+
+1 basic blocks, 2 edges.
+
+Basic block 0: first insn 27, last 26, loop_depth 0, count 0, freq 0.
+Predecessors:  ENTRY (fallthru)
+Successors:  EXIT (fallthru)
+Registers live at start: (nil)
+Registers live at end: (nil)
+Invalid sum of outgoing probabilities 0.0%
+
+
+
+try_optimize_cfg iteration 1
+
+(note 2 0 3 NOTE_INSN_DELETED)
+
+(note 3 2 27 NOTE_INSN_FUNCTION_BEG)
+
+(note 27 3 11 [bb 0] NOTE_INSN_BASIC_BLOCK)
+
+(insn 11 27 12 (set (reg:SI 23)
+        (const_int -1 [0xffffffffffffffff])) -1 (nil)
+    (nil))
+
+(insn 12 11 14 (set (reg:SI 23)
+        (unspec:SI[ 
+                (const:SI (plus:SI (symbol_ref:SI ("a"))
+                        (const_int -8589934592 [0xfffffffe00000000])))
+                (reg:SI 23)
+            ]  1)) -1 (nil)
+    (nil))
+
+(insn 14 12 16 (set (reg:SI 24)
+        (reg:SI 24)) -1 (nil)
+    (nil))
+
+(insn 16 14 19 (set (reg:SI 22)
+        (reg:SI 23)) -1 (nil)
+    (nil))
+
+(note 19 16 23 NOTE_INSN_FUNCTION_END)
+
+(insn 23 19 26 (set (reg/i:SI 1 1)
+        (reg:SI 22)) -1 (nil)
+    (nil))
+
+(insn 26 23 0 (use (reg/i:SI 1 1)) -1 (nil)
+    (nil))
+
+;; Function main
+
+25 registers.
+
+Register 23 used 1 times across 0 insns; set 1 time; dies in 0 places; NO_REGS or none; pointer.
+
+Register 24 used 1 times across 0 insns; set 1 time; user var; dies in 0 places; NO_REGS or none; pointer.
+
+3 basic blocks, 3 edges.
+
+Basic block 0: first insn 51, last 28, loop_depth 0, count 0, freq 0.
+Predecessors:  ENTRY (fallthru)
+Successors:  1 (fallthru) 2
+Registers live at start: (nil)
+Registers live at end: (nil)
+Invalid sum of outgoing probabilities 0.0%
+
+Basic block 1: first insn 52, last 32, loop_depth 0, count 0, freq 0.
+Predecessors:  0 (fallthru)
+Successors: 
+Registers live at start: (nil)
+Registers live at end: (nil)
+
+Basic block 2: first insn 34, last 40, loop_depth 0, count 0, freq 0.
+Predecessors:  0
+Successors: 
+Registers live at start: (nil)
+Registers live at end: (nil)
+
+
+
+try_optimize_cfg iteration 1
+
+(note 2 0 3 NOTE_INSN_DELETED)
+
+(note 3 2 51 NOTE_INSN_FUNCTION_BEG)
+
+(note 51 3 6 [bb 0] NOTE_INSN_BASIC_BLOCK)
+
+(insn 6 51 7 (set (reg/f:SI 23)
+        (symbol_ref:SI ("__main"))) -1 (nil)
+    (expr_list:REG_EQUAL (symbol_ref:SI ("__main"))
+        (nil)))
+
+(call_insn 7 6 8 (call (mem:SI (reg/f:SI 23) [0 S4 A36])
+        (const_int 0 [0x0])) -1 (nil)
+    (expr_list:REG_EH_REGION (const_int 0 [0x0])
+        (nil))
+    (nil))
+
+(note 8 7 18 0x30084740 NOTE_INSN_BLOCK_BEG)
+
+(insn 18 8 19 (set (reg/f:SI 25)
+        (symbol_ref/v:SI ("f"))) -1 (nil)
+    (expr_list:REG_EQUAL (symbol_ref/v:SI ("f"))
+        (nil)))
+
+(call_insn 19 18 21 (set (reg:SI 1 1)
+        (call (mem:SI (reg/f:SI 25) [0 S4 A36])
+            (const_int 0 [0x0]))) -1 (nil)
+    (expr_list:REG_EH_REGION (const_int 0 [0x0])
+        (nil))
+    (nil))
+
+(insn 21 19 24 (set (reg/v/f:SI 24)
+        (reg:SI 1 1)) -1 (nil)
+    (nil))
+
+(insn 24 21 26 (set (reg:SI 26)
+        (unspec:SI[ 
+                (reg/v/f:SI 24)
+                (const_int 1 [0x1])
+            ]  1)) -1 (nil)
+    (nil))
+
+(insn 26 24 27 (set (reg:QI 27)
+        (mem:QI (reg:SI 26) [0 S1 A9])) -1 (nil)
+    (nil))
+
+(insn 27 26 28 (set (reg:SI 28)
+        (zero_extend:SI (reg:QI 27))) -1 (nil)
+    (nil))
+
+(jump_insn 28 27 52 (set (pc)
+        (if_then_else (eq (reg:SI 28)
+                (const_int 42 [0x2a]))
+            (label_ref 34)
+            (pc))) -1 (nil)
+    (nil))
+
+(note 52 28 31 [bb 1] NOTE_INSN_BASIC_BLOCK)
+
+(insn 31 52 32 (set (reg/f:SI 29)
+        (symbol_ref:SI ("abort"))) -1 (nil)
+    (expr_list:REG_EQUAL (symbol_ref:SI ("abort"))
+        (nil)))
+
+(call_insn 32 31 33 (call (mem:SI (reg/f:SI 29) [0 S4 A36])
+        (const_int 0 [0x0])) -1 (nil)
+    (expr_list:REG_NORETURN (const_int 0 [0x0])
+        (nil))
+    (nil))
+
+(barrier 33 32 34)
+
+(code_label 34 33 53 3 "" "" [1 uses])
+
+(note 53 34 37 [bb 2] NOTE_INSN_BASIC_BLOCK)
+
+(insn 37 53 39 (set (reg/f:SI 30)
+        (symbol_ref:SI ("exit"))) -1 (nil)
+    (expr_list:REG_EQUAL (symbol_ref:SI ("exit"))
+        (nil)))
+
+(insn 39 37 40 (set (reg:SI 1 1)
+        (const_int 0 [0x0])) -1 (nil)
+    (nil))
+
+(call_insn 40 39 41 (call (mem:SI (reg/f:SI 30) [0 S4 A36])
+        (const_int 0 [0x0])) -1 (nil)
+    (expr_list:REG_NORETURN (const_int 0 [0x0])
+        (nil))
+    (expr_list (use (reg:SI 1 1))
+        (nil)))
+
+(barrier 41 40 42)
+
+(note 42 41 43 0x30084740 NOTE_INSN_BLOCK_END)
+
+(note 43 42 0 NOTE_INSN_FUNCTION_END)

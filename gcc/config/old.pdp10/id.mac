@@ -1,0 +1,87 @@
+; From DECsystem-10 / DECSYSTEM-20 Processor Reference Manual (June, 1982)
+
+	JFCL	17,.+1		;Clear flags
+	JRST	.+1		;Change PC
+	JFCL	1,PDP6		;PDP-6 has PC Change flag
+	MOVNI	AC,1		;Others do not.  Make AC all 1s
+	AOBJN	AC,.+1		;Increment both halves
+	JUMPN	AC,KA10		;KA10 if AC = 1000000 (carry
+	BLT	AC,0		;between halves)
+	JUMPE	AC,KI10		;KI10 if AC = 0
+	MOVEI	AC,1		;KL10 or KS10 if AC= 1,,1
+	SETZ	AC+1,		;Big binary integer
+	MOVEI	AC+3,1		;One digit byte
+	EXTEND	AC,[CVTBDO]	;Convert will abort
+	TLNE	AC+3,200000	;Test effect on N
+	JRST	KL10		;KL10 if N set
+	JRST	KS10		;KS10 if N unaffected
+
+; From ITS source code (?, ?)
+
+cpufnd:	jfcl 17,.+1	; Clear flags
+	jrst .+1	; Change PC
+	jfcl 1,[movei a,.cpu6	; PDP-6 has PC change flag
+		ret]
+	movni a,1	; Make AC all 1's
+	aobjn a,.+1	; Increment both halves
+	jumpn a,[	; KA if AC = 1,,0
+		move a,[010700,,-1]	; but perhaps also Foonly F-2 or F-3...
+		ibp a
+		tlne a,17		; Ensure X not overflowed into
+		 jrst [	movei a,.cpuka	; Overflow = KA
+			ret]
+		movei a,.cpuf2
+		ret]
+	; KI, KL or KS if AC = 0 (no carry)
+	blt a,
+	jumpe a,[movei a,.cpuki	; KI if AC not = 1,,1
+		ret]
+
+	; Either a KL or KS.  Perform IDIV test.
+	push p,b
+	movsi a,(setz)		; Set up -2^35 as dividend
+	seto b,			; Set up -1 as divisor
+	idivm a,b		; KL gets error, doesn't do it....
+	came b,[-1]		; So if B remains same, it's a KL.
+	 skipa a,[.cpuks]	; B got clobbered, it's a KS-10!
+	  movei a,.cpukl
+	pop p,b
+	ret
+
+; From TOAD-1 System Architecture Reference Manual (April, 1997)
+
+	JFCL	17,.+1		;Clear flags
+	JRST	.+1		;Change PC
+	JFCL	1,PDP6		;PDP-6 has PC Change flag
+	MOVNI	AC,1		;Others do not.  Make AC all 1s
+	AOBJN	AC,.+1		;Increment both halves
+	JUMPN	AC,KA10		;KA10 carries to left half
+	BLT	AC,0		;Try BLT.  Source=0; Dest=0.  AC must not be 0
+	JUMPE	AC,KI10		;KI10 if AC = 0
+	MOVSI	AC,400000	;Largest negative number
+	ADJBP	AC,[430100,,0]	;Check what this does
+	CAMN	AC,[430100,,0]	;The KL won't change this
+	JRST	KL10		;This must be a KL10
+	MOVSI	AC,450000	;A one-word global byte pointer
+	IBP	AC		;What does this do?
+	CAME	AC,[450000,,0]	;The KS doesn't change this
+	JRST	XKL1		;This must be an XKL-1
+	JRST	KS10		;Otherwise, it's a KS10
+
+; Misc PDP-6 vs KA10 tests
+
+	; PDP-6 has no Floating Overflow (JFCL 1,)
+
+	; PDP-6 has no Floating Underflow
+
+	JFCL	17,.+1		;Clear flags
+	MOVEI	AC,[400000,,0]	;-2^35
+	IDIVI	AC,2		;Divide by two
+	JFCL	10,PDP6		;PDP-6 if overflow
+
+	MOVEI	AC,[1,,[12345]]	;Initialize stack pointer
+	POP	AC,AC		;Try this
+	CAIN	AC,12345
+	 JUMPE	AC,KA10		;KA10 if AC receives word from stack
+	TLNE	AC,-1
+	 JRST	PDP6		;PDP-6 if AC receives decremented pointer
